@@ -1,11 +1,11 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-mode:"development",
+  mode: "development",
   entry: './src/index.js',
   output: {
-    filename: 'main.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
   plugins: [
@@ -14,7 +14,6 @@ mode:"development",
     template: './src/index.html',
     }),
   ],
-
   module: {
     rules: [
       {
@@ -22,5 +21,11 @@ mode:"development",
         use: ['style-loader', 'css-loader'],
       },
     ],
+  },
+  devServer: {
+    static: './dist',
+  },
+  optimization: {
+    runtimeChunk: 'single',
   },
 };
